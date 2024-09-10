@@ -1,0 +1,48 @@
+# ---------------------------- Poetry configuration ----------------------------
+
+[tool.poetry]
+name = "graphql-test"
+version = "0.1.0"
+description = ""
+authors = ["Adrian Carreno <adrian.carreno@gomoder.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+factory-boy = "^3.3.1"
+graphene-mongo = "^0.4.4"
+starlette-graphene3 = "^0.6.0"
+uvicorn = {extras = ["standard"], version = "^0.30.6"}
+
+[tool.poetry.group.dev.dependencies]
+ipython = "^8.27.0"
+ruff = "^0.6.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+## ----------------------------- Ruff configuration ----------------------------
+
+[tool.ruff.lint]
+# Go to https://docs.astral.sh/ruff/rules/ to see all the available rules
+select = ["F", "E", "W", "I", "N", "C90", "ARG"]
+exclude = ["api-gateway-simulator", "event-grid-simulator"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+"*_test.py" = ["ARG001"]
+
+[tool.ruff.lint.isort]
+force-single-line = true
+known-first-party = [
+    "clients",
+    "config",
+    "handlers",
+    "middleware",
+    "providers",
+    "repositories",
+    "routers",
+    "triggers",
+]

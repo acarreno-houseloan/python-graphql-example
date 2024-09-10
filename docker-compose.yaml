@@ -1,0 +1,32 @@
+services:
+  mongo:
+    container_name: mongo
+    image: mongo:5.0
+    environment:
+      TZ: ${TZ:-UTC}
+    volumes:
+      - data:/data/db
+
+  graphene:
+    container_name: graphene
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM python:3.12
+        WORKDIR /app
+        COPY pyproject.toml poetry.lock ./
+        RUN pip install poetry && poetry config virtualenvs.create false && poetry install --no-root --with dev
+    command: uvicorn server:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - mongo
+    environment:
+      TZ: ${TZ:-UTC}
+      DATABASE_URL: mongodb://mongo:27017/graphene
+      DATABASE_NAME: graphene
+
+volumes:
+  data:
