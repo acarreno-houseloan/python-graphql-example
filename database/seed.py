@@ -4,9 +4,7 @@ import os
 from mongoengine import connect
 
 if __name__ == "__main__":
-    DATABASE_URL = os.environ["DATABASE_URL"]
-    print(f"Connecting to database at {DATABASE_URL}")
-    connection = connect(host=DATABASE_URL)
+    connection = connect(host=os.environ["DATABASE_URL"])
 
     # Imports are done here because factory boy runs the query to the database
     # at import time
