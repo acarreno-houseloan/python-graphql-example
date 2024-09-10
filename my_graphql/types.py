@@ -2,13 +2,13 @@ import graphene
 from graphene import relay
 from graphene_mongo import MongoengineObjectType
 
-from database.models import CommentModel as CommentModel
-from database.models import LikeModel as LikeModel
-from database.models import PostModel as PostModel
-from database.models import UserModel as UserModel
+from database.models import Comment as CommentModel
+from database.models import Like as LikeModel
+from database.models import Post as PostModel
+from database.models import User as UserModel
 
 
-class UserType(MongoengineObjectType):
+class User(MongoengineObjectType):
     class Meta:
         model = UserModel
         interfaces = (relay.Node,)
@@ -16,21 +16,21 @@ class UserType(MongoengineObjectType):
     username = graphene.String()
 
 
-class PostType(MongoengineObjectType):
+class Post(MongoengineObjectType):
     class Meta:
         model = PostModel
         interfaces = (relay.Node,)
         exclude_fields = ("author_id",)
 
 
-class CommentType(MongoengineObjectType):
+class Comment(MongoengineObjectType):
     class Meta:
         model = CommentModel
         interfaces = (relay.Node,)
         exclude_fields = ("author_id", "post_id")
 
 
-class LikeType(MongoengineObjectType):
+class Like(MongoengineObjectType):
     class Meta:
         model = LikeModel
         interfaces = (relay.Node,)

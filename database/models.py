@@ -7,7 +7,7 @@ from mongoengine.fields import ReferenceField
 from mongoengine.fields import StringField
 
 
-class UserModel(Document):
+class User(Document):
     meta = {"collection": "users"}
 
     username = StringField()
@@ -20,29 +20,29 @@ class UserModel(Document):
         return self.username
 
 
-class PostModel(Document):
+class Post(Document):
     meta = {"collection": "posts"}
 
-    author = ReferenceField(UserModel)
+    author = ReferenceField(User)
     title = StringField()
     content = StringField()
     created_at = DateTimeField(default=datetime.now)
     updated_at = DateTimeField(default=datetime.now)
 
 
-class CommentModel(Document):
+class Comment(Document):
     meta = {"collection": "comments"}
 
-    author = ReferenceField(UserModel)
-    post = ReferenceField(PostModel)
+    author = ReferenceField(User)
+    post = ReferenceField(Post)
     content = StringField()
     created_at = DateTimeField(default=datetime.now)
     updated_at = DateTimeField(default=datetime.now)
 
 
-class LikeModel(Document):
+class Like(Document):
     meta = {"collection": "likes"}
 
-    user = ReferenceField(UserModel)
+    user = ReferenceField(User)
     likeable_id = ObjectIdField()
     likeable_type = StringField()

@@ -2,12 +2,12 @@ import factory
 import factory.fuzzy
 from factory.mongoengine import MongoEngineFactory
 
-from .models import CommentModel
-from .models import PostModel
-from .models import UserModel
+from .models import Comment as CommentModel
+from .models import Post as PostModel
+from .models import User as UserModel
 
 
-class UserFactory(MongoEngineFactory):
+class User(MongoEngineFactory):
     class Meta:  # type: ignore
         model = UserModel
 
@@ -16,7 +16,7 @@ class UserFactory(MongoEngineFactory):
     password = factory.Faker("password")
 
 
-class PostFactory(MongoEngineFactory):
+class Post(MongoEngineFactory):
     class Meta:  # type: ignore
         model = PostModel
 
@@ -25,7 +25,7 @@ class PostFactory(MongoEngineFactory):
     author = factory.fuzzy.FuzzyChoice(UserModel.objects)  # type: ignore
 
 
-class CommentFactory(MongoEngineFactory):
+class Comment(MongoEngineFactory):
     class Meta:  # type: ignore
         model = CommentModel
 

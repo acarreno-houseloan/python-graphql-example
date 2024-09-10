@@ -10,9 +10,9 @@ if __name__ == "__main__":
 
     # Imports are done here because factory boy runs the query to the database
     # at import time
-    from .factories import CommentFactory
-    from .factories import PostFactory
-    from .factories import UserFactory
+    from .factories import Comment as CommentFactory
+    from .factories import Post as PostFactory
+    from .factories import User as UserFactory
 
     args = argparse.ArgumentParser()
     args.add_argument("--users", type=int, default=10)
