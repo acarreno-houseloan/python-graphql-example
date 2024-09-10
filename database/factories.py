@@ -3,6 +3,7 @@ import factory.fuzzy
 from factory.mongoengine import MongoEngineFactory
 
 from .models import Comment as CommentModel
+from .models import Like as LikeModel
 from .models import Post as PostModel
 from .models import User as UserModel
 
@@ -32,3 +33,11 @@ class Comment(MongoEngineFactory):
     content = factory.Faker("text")
     author = factory.fuzzy.FuzzyChoice(UserModel.objects)  # type: ignore
     post = factory.fuzzy.FuzzyChoice(PostModel.objects)  # type: ignore
+
+
+class Like(MongoEngineFactory):
+    class Meta:  # type: ignore
+        model = LikeModel
+
+    user = factory.fuzzy.FuzzyChoice(UserModel.objects)  # type: ignore
+    comment = factory.fuzzy.FuzzyChoice(CommentModel.objects)  # type: ignore

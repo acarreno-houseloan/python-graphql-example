@@ -32,3 +32,4 @@ class Like(MongoengineObjectType):
         model = LikeModel
 
     user = graphene.Field(User)
+    comment = graphene.Field(Comment)

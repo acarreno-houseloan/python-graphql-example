@@ -2,7 +2,6 @@ from datetime import datetime
 
 from mongoengine import Document
 from mongoengine.fields import DateTimeField
-from mongoengine.fields import ObjectIdField
 from mongoengine.fields import ReferenceField
 from mongoengine.fields import StringField
 
@@ -44,5 +43,4 @@ class Like(Document):
     meta = {"collection": "likes"}
 
     user = ReferenceField(User)
-    likeable_id = ObjectIdField()
-    likeable_type = StringField()
+    comment = ReferenceField(Comment)

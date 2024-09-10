@@ -11,6 +11,7 @@ if __name__ == "__main__":
     # Imports are done here because factory boy runs the query to the database
     # at import time
     from .factories import Comment as CommentFactory
+    from .factories import Like as LikeFactory
     from .factories import Post as PostFactory
     from .factories import User as UserFactory
 
@@ -18,8 +19,10 @@ if __name__ == "__main__":
     args.add_argument("--users", type=int, default=10)
     args.add_argument("--posts", type=int, default=20)
     args.add_argument("--comments", type=int, default=50)
+    args.add_argument("--likes", type=int, default=100)
     args = args.parse_args()
 
     UserFactory.create_batch(args.users)
     PostFactory.create_batch(args.posts)
     CommentFactory.create_batch(args.comments)
+    LikeFactory.create_batch(args.likes)
